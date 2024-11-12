@@ -50,20 +50,21 @@ sexo_ui <- function(id) {
           choices = c("Predominância", "Feminino", "Masculino")
         ), 
         fluidRow(
-          column(6,
+          column(7,
                  withSpinner(
                    leafletOutput(NS(id,"mapa1")),
                    type = 8,
                    color = "#3C8DBD",
                    size = 0.5
                  )),
-          column(6,
+          column(5,
                  withSpinner(
                    reactableOutput(NS(id,"tabela1")),
                    type = 8,
                    color = "#3C8DBD",
                    size = 0.5
-                 ))),
+                 ))
+          ),
         footer = list(tags$h6(
           tags$b("Fonte:", style = 'font-family: sans-serif;'), "Detran-PA"
         ),
@@ -83,14 +84,14 @@ sexo_ui <- function(id) {
         ), 
         
         fluidRow(
-          column(6,
+          column(7,
                  withSpinner(
                    leafletOutput(NS(id,"mapa2")),
                    type = 8,
                    color = "#3C8DBD",
                    size = 0.5
                  )),
-          column(6,
+          column(5,
                  withSpinner(
                    uiOutput(NS(id,"saida")),
                    type = 8,

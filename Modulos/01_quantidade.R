@@ -11,7 +11,7 @@ quantidade_ui <- function(id) {
         #Select Ano
         selectInput(
           inputId = NS(id, "ano1"),
-          label = "Ano",
+          label = "ANO",
           choices = sort(unique(data_01[["ano"]]),decreasing = T),
           width = "200px"
         )
@@ -20,7 +20,7 @@ quantidade_ui <- function(id) {
         #Select Nivel     
         selectInput(
           inputId = NS(id, "nvl"),
-          label = "Nivel",
+          label = "NIVEL",
           choices = c("Estadual","Região de Integração","Municipal"),
           width = "200px"
         )
@@ -29,7 +29,7 @@ quantidade_ui <- function(id) {
         #Select Localidade     
         selectInput(
           inputId = NS(id, "localidade"),
-          label = "Localidade",
+          label = "LOCALIDADE",
           choices = NULL,
           width = "200px"
         )
@@ -46,18 +46,18 @@ quantidade_ui <- function(id) {
       box(
         title = textOutput(NS(id,"titulo_map1")),
         status = "primary",
-        collapsed = F,
-        headerBorder = T,
+        collapsed = FALSE,
+        headerBorder = TRUE,
         width = 12,
         fluidRow(
-        column(6,
+        column(7,
         withSpinner(
           leafletOutput(NS(id,"mapa1")),
           type = 8,
           color = "#3C8DBD",
           size = 0.5
         )),
-        column(6,
+        column(5,
         withSpinner(
           reactableOutput(NS(id,"tabela1")),
           type = 8,
@@ -65,26 +65,26 @@ quantidade_ui <- function(id) {
           size = 0.5
         ))),
         footer = list(tags$h6(
-          tags$b("Fonte:", style = 'font-family: sans-serif;'), "Detran-PA"
+          tags$b("Fonte:", style = 'font-family: sans-serif;'), "RENACH/DTI/DETRAN-PA"
         ),
-        tags$h6(tags$b("Elaboração:"), "Detran-PA"))
+        tags$h6(tags$b("Elaboração:"), "CNP"))
       ),
       ##Mapa2----
       box(
         title = textOutput(NS(id,"titulo_map2")),
         status = "primary",
-        collapsed = F,
-        headerBorder = T,
+        collapsed = FALSE,
+        headerBorder = TRUE,
         width = 12,
         fluidRow(
-        column(6,
+        column(7,
           withSpinner(
           leafletOutput(NS(id,"mapa2")),
           type = 8,
           color = "#3C8DBD",
           size = 0.5
         )),
-        column(6,
+        column(5,
         withSpinner(
           reactableOutput(NS(id,"tabela2")),
           type = 8,
@@ -157,7 +157,7 @@ quantidade_Server <- function(id) {
             scientific = FALSE
           )
         )),
-        subtitle = paste0("Novos Condutores em ",input$ano1),
+        subtitle = paste0("NOVAS CNH em ",input$ano1),
         fill = TRUE,
         gradient = TRUE,
         iconElevation = 2,
@@ -190,7 +190,7 @@ quantidade_Server <- function(id) {
             scientific = FALSE
           )
         )),
-        subtitle = paste0("Total de Condutores em ",input$ano1),
+        subtitle = paste0("TOTAL GERAL CNH em ",input$ano1),
         color = "primary",
         fill = TRUE,
         gradient = TRUE,
