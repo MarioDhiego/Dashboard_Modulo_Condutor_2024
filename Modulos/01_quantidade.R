@@ -4,6 +4,14 @@
 quantidade_ui <- function(id) {
   fluidPage(
    #Painel contendo filtros e Mapa tabela e Gráfico de linnha----
+   
+   #Infobox's----
+   panel(
+     fluidRow(
+       bs4InfoBoxOutput(NS(id,"total_pa_ano"),width = 6),
+       bs4InfoBoxOutput(NS(id,"total_pa"),width = 6)
+     )),
+   
     panel(
       #Controles de filtro 
       fluidRow(
@@ -12,7 +20,7 @@ quantidade_ui <- function(id) {
         selectInput(
           inputId = NS(id, "ano1"),
           label = "ANO",
-          choices = sort(unique(data_01[["ano"]]),decreasing = T),
+          choices = sort(unique(data_01[["ano"]]),decreasing = TRUE),
           width = "200px"
         )
       ),
@@ -20,7 +28,7 @@ quantidade_ui <- function(id) {
         #Select Nivel     
         selectInput(
           inputId = NS(id, "nvl"),
-          label = "NIVEL",
+          label = "NÍVEL",
           choices = c("Estadual","Região de Integração","Municipal"),
           width = "200px"
         )
@@ -34,12 +42,7 @@ quantidade_ui <- function(id) {
           width = "200px"
         )
       )),
-      #Infobox's----
-      panel(
-      fluidRow(
-        bs4InfoBoxOutput(NS(id,"total_pa_ano"),width = 6),
-        bs4InfoBoxOutput(NS(id,"total_pa"),width = 6)
-      )),
+      
       #Mapa e tabela----
       fluidRow(
       ##Mapa1----
@@ -252,8 +255,11 @@ quantidade_Server <- function(id) {
         ) %>% lapply(htmltools::HTML)
       
       # Renderizar o mapa com leaflet
-      leaflet(dados, options = leafletOptions(minZoom = 0, maxZoom = 15)) %>%
+      leaflet(dados, options = leafletOptions(minZoom = 0, 
+                                              maxZoom = 30,
+                                              zoomControl = TRUE)) %>%
         addTiles() %>%
+        addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
         addPolygons(
           weight = 2,
           opacity = 1,
@@ -408,8 +414,11 @@ quantidade_Server <- function(id) {
         ) %>% lapply(htmltools::HTML)
       
       # Renderizar o mapa com leaflet
-      leaflet(dados, options = leafletOptions(minZoom = 0, maxZoom = 15)) %>%
+      leaflet(dados, options = leafletOptions(minZoom = 0, 
+                                              maxZoom = 15,
+                                              zoomControl = TRUE)) %>%
         addTiles() %>%
+        addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
         addPolygons(
           weight = 2,
           opacity = 1,

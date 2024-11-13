@@ -1,3 +1,16 @@
+#===============================================================================#
+#                                                                               #
+#              DETRAN-PA - Departamento de Trânsito do Estado do Pará           #
+#                                                                               #
+#===============================================================================#
+#==== DESCRIÇÃO:    Dashboard de CNH - Pará
+#==== ESCRITO POR:  Mário Diego Valente
+#====               Tito Félix de Oliveira
+#====               Kleber Bezerra Salim
+#==== SITE:         https://www.detran.pa.gov.br/
+#==== LICENÇA:      MIT
+#==== PROJETO:      https://github.com/MarioDhiego/
+#===============================================================================#
 
 
 # Interface do Usuário---------------------------------------------------------#
@@ -17,7 +30,7 @@ shinyApp(
     header = dashboardHeader(
       border = TRUE,
       compact = TRUE,
-      skin = "light",
+      skin = "blue",
       status = "white",
       sidebarIcon = shiny::icon("bars"),
       controlbarIcon = shiny::icon("th"),
@@ -36,8 +49,8 @@ shinyApp(
     options = list(sidebarExpandOnHover = TRUE),
     sidebar = dashboardSidebar(
       skin = "dark",
-      minified = TRUE,
       collapsed = FALSE,
+      minified = TRUE,
       sidebarMenu(
         menuItem(
           "ANUÁRIO",
@@ -71,14 +84,14 @@ shinyApp(
         menuItem("Sobre", tabName = "sobre", icon = icon("info-circle"))
       )
     ),
-    #------------------------------------------------------------------------------#
-    controlbar = dashboardControlbar(skinSelector(), pinned = TRUE),
-    #------------------------------------------------------------------------------#
-    footer = dashboardFooter(
-      left = tags$b("COPYRIGHT © DETRAN-PA - TODOS OS DIREITOS RESERVADOS"),
-      right = tags$b("BELÉM-PA, 2024 v.1")
-    ),
-    #------------------------------------------------------------------------------#
+#------------------------------------------------------------------------------#
+controlbar = dashboardControlbar(skinSelector(), pinned = TRUE),
+#------------------------------------------------------------------------------#
+footer = dashboardFooter(
+left = tags$b("COPYRIGHT © DETRAN-PA - TODOS OS DIREITOS RESERVADOS"),
+right = tags$b("BELÉM-PA, 2024 v.1")
+),
+#------------------------------------------------------------------------------#
     body = dashboardBody(
       tabItems(
         tabItem(
@@ -97,8 +110,8 @@ shinyApp(
                     id = "foto1",
                     src = "cnh1.jpg",
                     controls = "controls",
-                    width = 650,
-                    height = 450
+                    width = 750,
+                    height = 500
                   ),
                   tags$br(),
                   tags$a("Photo by Asdecom"),
@@ -117,47 +130,19 @@ shinyApp(
                   tags$p(
                     style = "text-align: justify;font-si20pt",
                     strong(
-                      "O DETRAN-PA, com sua missão fundamentada nos princípios da Política Nacional de Trânsito(Resolução do CONTRAN Nº514, de 18 de dezembro de 2014), apresenta, neste Painél, o Processo de Integração de Múltiplas Bases de Dados (Pareamento) sobre vítimas fatais por acidentes de trânsito."
+                      "O DETRAN-PA, com sua missão fundamentada nos princípios da Política Nacional de Trânsito(Resolução do CONTRAN Nº514, de 18 de dezembro de 2014), apresenta, neste Painél, o Processo de Integração de Múltiplas Bases de Dados (Pareamento) sobre informação referentes a Carteira Nacioanal de Habilitação."
                     )
                   ),
                   tags$br(),
                   tags$p(
                     style = "text-align: justify;font-si20pt",
                     strong(
-                      "O Processo de Integração de Dados foi Realizado junto aos 144 municípios que compõem o Estado do Pará. Como Resultados foi criado uma base de dados de frota registrada."
+                      "O Processo de Integração de Dados foi Realizado junto aos 144 municípios que compõem o Estado do Pará. Como Resultados foi criado uma base de dados de 1º Habilitação, Renovação e Inclusão de categorias."
                     )
                   )
                 )
               )
             ),
-            tabPanel("LINHA DE BASE", icon = icon("hospital"), fluidRow(
-              column(
-                width = 4,
-                position = "center",
-                solidHeader = TRUE,
-                tags$br(),
-                tags$p(
-                  style = "text-align:justify;font-si20pt",
-                  strong(
-                    "A Definição de Mortes e VÍtimas Graves foi Estabelecida com Base no Padrão da Organização Mundial de São de (WHO, 2022)."
-                  )
-                ),
-                tags$br(),
-                tags$p(
-                  style = "text-align:justify;font-si20pt",
-                  strong(
-                    "1) VÍtima Fatal: uma pessoa morta imediatamente ou até 30 dias, como resultado do acidente de trânsito."
-                  )
-                ),
-                tags$br(),
-                tags$p(
-                  style = "text-align:justify;font-si20pt",
-                  strong(
-                    "2) VÍtima Grave: a pessoa hospitalizada por pelo menos 24 horas devido a ferimentos sofridos em acidentes de trânsito."
-                  )
-                )
-              )
-            )),
             
             tabPanel(
               "ALINHAMENTO TÉCNICO",
@@ -187,7 +172,7 @@ shinyApp(
                   tags$p(
                     style = "text-align: justify;font-si20pt",
                     strong(
-                      "Nesse Contexto, o Anuário Estatístico de Acidentes de Trânsito, será construído em Alinhamento ao Manual de Gestão do RENAEST (Resolução do CONTRAN Nº808/2020), utilizando metodologias factíveis com estatísticas de trânsito padronizada para todo o Território Nacional, e aos Objetivos de Desenvolvimento Sustentáveis (Resolução da ONU Nº70/2015)."
+                      "Nesse Contexto, o Anuário Estatístico de CNH, será construído em Alinhamento ao Manual de Gestão do RENAEST (Resolução do CONTRAN Nº808/2020), utilizando metodologias factíveis com estatísticas de trânsito padronizada para todo o Território Nacional, e aos Objetivos de Desenvolvimento Sustentáveis (Resolução da ONU Nº70/2015)."
                     )
                   )
                 )
@@ -313,7 +298,8 @@ shinyApp(
                 )
               )
             ),
-            tabPanel("CRÉDITOS", icon = icon("phone"), fluidRow(
+            tabPanel("CRÉDITOS", icon = icon("phone"), 
+            fluidRow(
               column(
                 width = 4,
                 position = "center",
@@ -336,15 +322,26 @@ shinyApp(
                   )
                 ),
                 tags$br(),
+              ),
+              column(
+                width = 4,
+                position = "center",
+                solidHeader = TRUE,
+                tags$br(),
                 tags$p(
                   style = "text-align: justify;font-si20pt",
                   strong(
-                    "A autorização para a reprodução total ou parcial deste trabalho deve ser solicitada ao Departamento de Trânsito do Estado do Pará, Gerência de Análise e Estatística de Trânsito, gerest@detran.pa.gov.br. Os Estados membros das Nações Unidas e suas instituições governamentais podem reproduzir este trabalho sem autorização prévia. Solicita-se apenas que mencionem a fonte e informem ao DETRAN-PA de tal reprodução."
+                    "A autorização para a reprodução total ou parcial deste trabalho deve ser solicitada ao Departamento de Trânsito do Estado do Pará, Gerência de Análise e Estatística de Trânsito, gerest@detran.pa.gov.br."
+                  ),
+                  tags$br(),
+                  tags$br(),
+                  tags$br(),
+                  strong(
+                    "Os Estados membros das Nações Unidas e suas instituições governamentais podem reproduzir este trabalho sem autorização prévia. Solicita-se apenas que mencionem a fonte e informem ao DETRAN-PA de tal reprodução."
                   )
-                ),
-                tags$br(),
-                
+                )
               ),
+              
               column(
                 width = 4,
                 position = "center",
@@ -735,7 +732,7 @@ strong("2) -   A cada 5 anos, para condutores com Idade de 51 a 70 anos;")),
             fluidRow(column(
               4,
               div(
-                style = "text-align: left; text-justify: inter-word;",
+                style = "text-align: justify; text-justify: inter-word;",
                 # Estilo CSS para centralizar e justificar o texto
                 HTML(
                   "
@@ -752,8 +749,7 @@ strong("2) -   A cada 5 anos, para condutores com Idade de 51 a 70 anos;")),
              para a criação de aplicações web estatísticas avançadas e dashboards envolventes.</p>"
                 )
               )
-            ), column(8, align = "center", img(
-              src = "", height = 350
+            ), column(8, align = "center", img(src = "Dashboard.gif", height = 350
             ))),
             footer = fluidRow(
               column(4, align = "center", tags$img(src = "R_logo.svg.png", height = 100)),
@@ -767,6 +763,29 @@ strong("2) -   A cada 5 anos, para condutores com Idade de 51 a 70 anos;")),
     
   ),
   server = function(input, output, session) {
+    
+    detran_location <- data.frame(
+      lat = -1.37843,
+      lon = -48.44034
+    )
+    
+    output$mapa <- renderLeaflet({
+      df <- read.csv(textConnection(
+        "Nome, lat, lon,
+         DETRAN-PA, -1.37843, -48.44034" ))
+      leaflet::leaflet(df) %>%
+        addTiles() %>%
+        addMarkers(~lon, ~lat, label= ~htmlEscape(Nome),
+                   labelOptions = labelOptions(noHide = FALSE,
+                                               textsize = "20px")) %>%
+        addProviderTiles(providers$OpenSeaMap) %>%
+        setView(lng = detran_location$lon,
+                lat = detran_location$lat,
+                zoom = 15)
+    })
+    
+    
+    
     quantidade_Server("quantidade")
     sexo_Server("sexo")
     faixa_idade_Server("faixa_idade")

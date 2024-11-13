@@ -11,7 +11,7 @@ sexo_ui <- function(id) {
         #Select Ano
         selectInput(
           inputId = NS(id, "ano1"),
-          label = "Ano",
+          label = "ANO",
           choices = sort(unique(data_01[["ano"]]),decreasing = T),
           width = "200px"
         )
@@ -20,7 +20,7 @@ sexo_ui <- function(id) {
         #Select Nivel     
         selectInput(
           inputId = NS(id, "nvl"),
-          label = "Nivel",
+          label = "NÍVEL",
           choices = c("Estadual","Região de Integração","Municipal"),
           width = "200px"
         )
@@ -29,7 +29,7 @@ sexo_ui <- function(id) {
         #Select Localidade     
         selectInput(
           inputId = NS(id, "localidade"),
-          label = "Localidade",
+          label = "LOCALIDADE",
           choices = NULL,
           width = "200px"
         )
@@ -41,8 +41,8 @@ sexo_ui <- function(id) {
       box(
         title = textOutput(NS(id,"titulo_map1")),
         status = "primary",
-        collapsed = F,
-        headerBorder = T,
+        collapsed = FALSE,
+        headerBorder = TRUE,
         width = 12,
         selectInput(
           inputId = NS(id, "dimensao"),
@@ -222,8 +222,11 @@ sexo_Server <- function(id) {
         ) %>% lapply(htmltools::HTML)
         
         ##Mapa B----
-        leaflet(dados, options = leafletOptions(minZoom = 0, maxZoom = 15,zoomControl = FALSE)) %>%
+        leaflet(dados, options = leafletOptions(minZoom = 0, 
+                                                maxZoom = 30,
+                                                zoomControl = TRUE)) %>%
           addTiles() %>%
+          addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
           htmlwidgets::onRender(
             "function(el, x) {
             L.control.zoom({ position: 'topright' }).addTo(this);
@@ -300,8 +303,11 @@ sexo_Server <- function(id) {
           ) %>% lapply(htmltools::HTML)
         
         # Renderizar o mapa com leaflet
-        leaflet(dados, options = leafletOptions(minZoom = 0, maxZoom = 15,zoomControl = FALSE)) %>%
+        leaflet(dados, options = leafletOptions(minZoom = 0, 
+                                                maxZoom = 30,
+                                                zoomControl = TRUE)) %>%
           addTiles() %>%
+          addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
           addPolygons(
             weight = 2,
             opacity = 1,
@@ -612,8 +618,11 @@ sexo_Server <- function(id) {
         ) %>% lapply(htmltools::HTML)
         
         ##Mapa A----
-        leaflet(dados, options = leafletOptions(minZoom = 0, maxZoom = 15,zoomControl = FALSE)) %>%
+        leaflet(dados, options = leafletOptions(minZoom = 0, 
+                                                maxZoom = 30,
+                                                zoomControl = TRUE)) %>%
           addTiles() %>%
+          addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
           htmlwidgets::onRender(
             "function(el, x) {
             L.control.zoom({ position: 'topright' }).addTo(this);
@@ -688,8 +697,11 @@ sexo_Server <- function(id) {
           ) %>% lapply(htmltools::HTML)
         
         ##Mapa B----
-        leaflet(dados, options = leafletOptions(minZoom = 0, maxZoom = 15,zoomControl = FALSE)) %>%
+        leaflet(dados, options = leafletOptions(minZoom = 0, 
+                                                maxZoom = 30,
+                                                zoomControl = TRUE)) %>%
           addTiles() %>%
+          addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
           htmlwidgets::onRender(
             "function(el, x) {
             L.control.zoom({ position: 'topright' }).addTo(this);
@@ -764,8 +776,11 @@ sexo_Server <- function(id) {
           ) %>% lapply(htmltools::HTML)
         
         # Renderizar o mapa com leaflet
-        leaflet(dados, options = leafletOptions(minZoom = 0, maxZoom = 15,zoomControl = FALSE)) %>%
+        leaflet(dados, options = leafletOptions(minZoom = 0, 
+                                                maxZoom = 30,
+                                                zoomControl = FALSE)) %>%
           addTiles() %>%
+          addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
           addPolygons(
             weight = 2,
             opacity = 1,

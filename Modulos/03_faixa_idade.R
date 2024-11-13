@@ -11,7 +11,7 @@ faixa_idade_ui <- function(id) {
         #Select Ano
         selectInput(
           inputId = NS(id, "ano1"),
-          label = "Ano",
+          label = "ANO",
           choices = sort(unique(data_05[["ano"]]),decreasing = T),
           width = "200px"
         )
@@ -20,7 +20,7 @@ faixa_idade_ui <- function(id) {
         #Select Nivel     
         selectInput(
           inputId = NS(id, "nvl"),
-          label = "Nivel",
+          label = "NÍVEL",
           choices = c("Estadual","Região de Integração","Municipal"),
           width = "200px"
         )
@@ -29,7 +29,7 @@ faixa_idade_ui <- function(id) {
         #Select Localidade     
         selectInput(
           inputId = NS(id, "localidade"),
-          label = "Localidade",
+          label = "LOCALIDADE",
           choices = NULL,
           width = "200px"
         )
@@ -50,14 +50,14 @@ faixa_idade_ui <- function(id) {
           choices = c("Predominância",as.character(unique(data_05$categoria)))
         ), 
         fluidRow(
-          column(6,
+          column(7,
                  withSpinner(
                    leafletOutput(NS(id,"mapa1")),
                    type = 8,
                    color = "#3C8DBD",
                    size = 0.5
                  )),
-          column(6,
+          column(5,
                  withSpinner(
                    reactableOutput(NS(id,"tabela1")),
                    type = 8,
@@ -192,8 +192,11 @@ faixa_idade_Server <- function(id) {
         ) %>% lapply(htmltools::HTML)
         
         # Renderizar o mapa com leaflet
-        leaflet(dados, options = leafletOptions(minZoom = 0, maxZoom = 15,zoomControl = FALSE)) %>%
+        leaflet(dados, options = leafletOptions(minZoom = 0, 
+                                                maxZoom = 30,
+                                                zoomControl = TRUE)) %>%
           addTiles() %>%
+          addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
           htmlwidgets::onRender(
             "function(el, x) {
             L.control.zoom({ position: 'topright' }).addTo(this);
@@ -268,8 +271,11 @@ faixa_idade_Server <- function(id) {
               ) %>% lapply(htmltools::HTML)
 
 ## Mapa B ----
-            leaflet(dados, options = leafletOptions(minZoom = 0, maxZoom = 15,,zoomControl = FALSE)) %>%
+            leaflet(dados, options = leafletOptions(minZoom = 0, 
+                                                    maxZoom = 30,
+                                                    zoomControl = TRUE)) %>%
               addTiles() %>%
+              addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
               htmlwidgets::onRender(
             "function(el, x) {
             L.control.zoom({ position: 'topright' }).addTo(this);

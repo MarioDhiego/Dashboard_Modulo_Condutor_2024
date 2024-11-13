@@ -11,7 +11,7 @@ remu_ui <- function(id) {
         #Select Ano
         selectInput(
           inputId = NS(id, "ano1"),
-          label = "Ano",
+          label = "ANO",
           choices = sort(unique(data_01[["ano"]]),decreasing = T),
           width = "200px"
         )
@@ -20,7 +20,7 @@ remu_ui <- function(id) {
         #Select Nivel     
         selectInput(
           inputId = NS(id, "nvl"),
-          label = "Nivel",
+          label = "NÍVEL",
           choices = c("Estadual","Região de Integração","Municipal"),
           width = "200px"
         )
@@ -29,7 +29,7 @@ remu_ui <- function(id) {
         #Select Localidade     
         selectInput(
           inputId = NS(id, "localidade"),
-          label = "Localidade",
+          label = "LOCALIDADE",
           choices = NULL,
           width = "200px"
         )
@@ -45,23 +45,23 @@ remu_ui <- function(id) {
         width = 12,
         selectInput(
           inputId = NS(id, "dimensao1"),
-          label = "Dimensão",width = "200px",
+          label = "Dimensão", width = "400px",
           choices = c("Predominância","Sim","Não")
         ), 
         fluidRow(
-          column(6,
+          column(8,
                  withSpinner(
                    leafletOutput(NS(id,"mapa1")),
                    type = 8,
                    color = "#3C8DBD",
-                   size = 0.5
+                   size = 0.8
                  )),
-          column(6,
+          column(4,
                  withSpinner(
                    reactableOutput(NS(id,"tabela1")),
                    type = 8,
                    color = "#3C8DBD",
-                   size = 0.5
+                   size = 0.8
                  ))),
         footer = list(tags$h6(
           tags$b("Fonte:", style = 'font-family: sans-serif;'), "Detran-PA"
@@ -72,29 +72,29 @@ remu_ui <- function(id) {
       box(
         title = textOutput(NS(id,"titulo_map2")),
         status = "primary",
-        collapsed = F,
-        headerBorder = T,
+        collapsed = FALSE,
+        headerBorder = TRUE,
         width = 12,
         selectInput(
           inputId = NS(id, "dimensao2"),
-          label = "Dimensão",width = "200px",
+          label = "Dimensão",width = "400px",
           choices = c("Predominância","Sim","Não")
         ), 
         
         fluidRow(
-          column(6,
+          column(8,
                  withSpinner(
                    leafletOutput(NS(id,"mapa2")),
                    type = 8,
                    color = "#3C8DBD",
-                   size = 0.5
+                   size = 0.8
                  )),
-          column(6,
+          column(4,
                  withSpinner(
                    reactableOutput(NS(id,"tabela2")),
                    type = 8,
                    color = "#3C8DBD",
-                   size = 0.5
+                   size = 0.8
                  ))),
         footer = list(tags$h6(
           tags$b("Fonte:", style = 'font-family: sans-serif;'), "Detran-PA"
@@ -107,14 +107,14 @@ remu_ui <- function(id) {
       box(
         title = textOutput(NS(id,"titulo_grafico1")),
         status = "primary",
-        collapsed = F,
-        headerBorder = T,
+        collapsed = FALSE,
+        headerBorder = TRUE,
         width = 12,
         withSpinner(
           echarts4rOutput(NS(id,"grafico1")),
           type = 8,
           color = "#3C8DBD",
-          size = 0.5
+          size = 0.8
         ),
         footer = list(tags$h6(
           tags$b("Fonte:", style = 'font-family: sans-serif;'), "Detran-PA"
@@ -125,14 +125,14 @@ remu_ui <- function(id) {
       box(
         title = textOutput(NS(id,"titulo_grafico2")),
         status = "primary",
-        collapsed = F,
-        headerBorder = T,
+        collapsed = FALSE,
+        headerBorder = TRUE,
         width = 12,
         withSpinner(
           echarts4rOutput(NS(id,"grafico2")),
           type = 8,
           color = "#3C8DBD",
-          size = 0.5
+          size = 0.8
         ),
         footer = list(tags$h6(
           tags$b("Fonte:", style = 'font-family: sans-serif;'), "Detran-PA"
@@ -219,8 +219,11 @@ remu_Server <- function(id) {
           lapply(htmltools::HTML)
         
         ##Mapa A----
-        leaflet(dados, options = leafletOptions(minZoom = 0, maxZoom = 15,zoomControl = FALSE)) %>% 
+        leaflet(dados, options = leafletOptions(minZoom = 0, 
+                                                maxZoom = 30,
+                                                zoomControl = TRUE)) %>% 
           addTiles() %>%
+          addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
           htmlwidgets::onRender(
             "function(el, x) {
             L.control.zoom({ position: 'topright' }).addTo(this);
@@ -297,8 +300,11 @@ remu_Server <- function(id) {
           ) %>% lapply(htmltools::HTML)
         
         ##Mapa B----
-        leaflet(dados, options = leafletOptions(minZoom = 0, maxZoom = 15,zoomControl = FALSE)) %>%
+        leaflet(dados, options = leafletOptions(minZoom = 0, 
+                                                maxZoom = 30,
+                                                zoomControl = TRUE)) %>%
           addTiles() %>%
+          addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
           htmlwidgets::onRender(
             "function(el, x) {
             L.control.zoom({ position: 'topright' }).addTo(this);
@@ -509,8 +515,11 @@ remu_Server <- function(id) {
         ) %>% 
           lapply(htmltools::HTML)
         ##Mapa A----
-        leaflet(dados, options = leafletOptions(minZoom = 0, maxZoom = 15,zoomControl = FALSE)) %>% 
+        leaflet(dados, options = leafletOptions(minZoom = 0, 
+                                                maxZoom = 30,
+                                                zoomControl = TRUE)) %>% 
           addTiles() %>%
+          addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
           htmlwidgets::onRender(
             "function(el, x) {
             L.control.zoom({ position: 'topright' }).addTo(this);
@@ -588,8 +597,11 @@ remu_Server <- function(id) {
           ) %>% lapply(htmltools::HTML)
         
         ##Mapa B----
-        leaflet(dados, options = leafletOptions(minZoom = 0, maxZoom = 15,zoomControl = FALSE)) %>%
+        leaflet(dados, options = leafletOptions(minZoom = 0, 
+                                                maxZoom = 30,
+                                                zoomControl = TRUE)) %>%
           addTiles() %>%
+          addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
           htmlwidgets::onRender(
             "function(el, x) {
             L.control.zoom({ position: 'topright' }).addTo(this);
