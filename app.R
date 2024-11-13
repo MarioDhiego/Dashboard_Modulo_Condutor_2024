@@ -110,7 +110,7 @@ right = tags$b("BELÉM-PA, 2024 v.1")
                     id = "foto1",
                     src = "cnh1.jpg",
                     controls = "controls",
-                    width = 750,
+                    width = 650,
                     height = 500
                   ),
                   tags$br(),
@@ -309,10 +309,14 @@ right = tags$b("BELÉM-PA, 2024 v.1")
                   style = "text-align: justify;font-si20pt",
                   strong("DEPARTAMENTO DE TRÂNSITO DO ESTADO DO PARÁ - DETRAN/PA")
                 ),
-                tags$p(style = "text-align: justify;font-si20pt", strong("RENATA MIRELA COELHO")),
-                tags$p(style = "text-align: justify;font-si20pt", strong("AVENIDA: AUGUSTO MONTENEGRO KM 03 S/N")),
-                tags$p(style = "text-align: justify;font-si20pt", strong("CEP: 66635-918 - PARQUE VERDE - BELÉM - PARÁ")),
-                tags$a("https://www.detran.pa.gov.br", href = "https://www.detran.pa.gov.br"),
+                tags$p(style = "text-align: justify;font-si20pt",
+                       strong("RENATA MIRELA COELHO")),
+                tags$p(style = "text-align: justify;font-si20pt",
+                       strong("AVENIDA: AUGUSTO MONTENEGRO KM 03 S/N")),
+                tags$p(style = "text-align: justify;font-si20pt",
+                       strong("CEP: 66635-918 - PARQUE VERDE - BELÉM - PARÁ")),
+                tags$a("https://www.detran.pa.gov.br",
+                       href = "https://www.detran.pa.gov.br"),
                 tags$br(),
                 tags$br(),
                 tags$p(
@@ -322,25 +326,20 @@ right = tags$b("BELÉM-PA, 2024 v.1")
                   )
                 ),
                 tags$br(),
-              ),
-              column(
-                width = 4,
-                position = "center",
-                solidHeader = TRUE,
-                tags$br(),
                 tags$p(
                   style = "text-align: justify;font-si20pt",
                   strong(
-                    "A autorização para a reprodução total ou parcial deste trabalho deve ser solicitada ao Departamento de Trânsito do Estado do Pará, Gerência de Análise e Estatística de Trânsito, gerest@detran.pa.gov.br."
-                  ),
-                  tags$br(),
-                  tags$br(),
-                  tags$br(),
-                  strong(
-                    "Os Estados membros das Nações Unidas e suas instituições governamentais podem reproduzir este trabalho sem autorização prévia. Solicita-se apenas que mencionem a fonte e informem ao DETRAN-PA de tal reprodução."
+                    "A autorização para a reprodução total ou parcial deste trabalho deve ser solicitada ao Departamento de Trânsito do Estado do Pará, Gerência de Análise e Estatística de Trânsito, gerest@detran.pa.gov.br. Os Estados membros das Nações Unidas e suas instituições governamentais podem reproduzir este trabalho sem autorização prévia. Solicita-se apenas que mencionem a fonte e informem ao DETRAN-PA de tal reprodução."
                   )
-                )
-              ),
+                )),
+               
+              
+              
+              
+              
+              
+              
+              
               
               column(
                 width = 4,
